@@ -21,8 +21,8 @@ echo "Build wasm app .."
 # make
 # cd ..
 
-echo "Generate test_wasm.h .."
-${PWD}/src/wasm-src/build/binarydump -o ${PWD}/src/wasm-src/test_wasm.h -n wasm_test_file ${PWD}/src/wasm-src/test.wasm
-cp -a ${PWD}/src/wasm-src/test_wasm.h ${PWD}/src/test_wasm.h
+# echo "Generate test_wasm.h .."
+# ${PWD}/src/wasm-src/build/binarydump -o ${PWD}/src/wasm-src/test_wasm.h -n wasm_test_file ${PWD}/src/wasm-src/test.wasm
+# cp -a ${PWD}/src/wasm-src/test_wasm.h ${PWD}/src/test_wasm.h
 
-echo "Done"
+# echo "Done"

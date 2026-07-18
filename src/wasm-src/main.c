@@ -3,10 +3,21 @@
  * SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
  */
 
+#include <stdint.h>
 #include <stdio.h>
-#include <unistd.h>
 
-int main(int argc, char **argv){
-    printf("Hello world!\n");
+static int fib(int n)
+{
+    if (n <= 1)
+        return n;
+    return fib(n - 1) + fib(n - 2);
+}
+
+int main(void)
+{
+    volatile int result = fib(30);
+
+    // (void)result;
+    printf("The result is: %d\n", result);
     return 0;
 }
