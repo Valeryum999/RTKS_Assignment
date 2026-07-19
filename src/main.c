@@ -153,13 +153,17 @@ iwasm_main(void *arg1, void *arg2, void *arg3)
         goto fail2;
     }
     
-    start = k_uptime_get_32();
-    before_execution = k_cycle_get_32();
-    /* invoke the main function */
-    app_instance_main(wasm_module_inst);
-
-    after_execution = k_cycle_get_32();
-    end = k_uptime_get_32();
+    for(int i=0; i<20; i++){
+        start = k_uptime_get_32();
+        before_execution = k_cycle_get_32();
+        /* invoke the main function */
+        app_instance_main(wasm_module_inst);
+        after_execution = k_cycle_get_32();
+        end = k_uptime_get_32();
+        printf("%d: Total main execution cycles: %d\n", i, (after_execution - before_execution));
+        printf("%d: Total execution time: %d ms\n", i, (end - start));
+        k_sleep(K_SECONDS(2));
+    }
 
     /* destroy the module instance */
     wasm_runtime_deinstantiate(wasm_module_inst);
@@ -172,8 +176,6 @@ fail1:
     /* destroy runtime environment */
     wasm_runtime_destroy();
 
-    printf("Total main execution cycles: %d\n", (after_execution - before_execution));
-    printf("Total execution time: %d ms\n", (end - start));
 }
 
 #define MAIN_THREAD_STACK_SIZE (CONFIG_MAIN_THREAD_STACK_SIZE)

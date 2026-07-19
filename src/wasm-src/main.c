@@ -17,7 +17,6 @@ int main(void)
 {
     volatile int result = fib(30);
 
-    // (void)result;
-    printf("The result is: %d\n", result);
+    (void)result;
     return 0;
 }
