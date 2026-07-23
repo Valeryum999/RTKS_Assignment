@@ -38,7 +38,10 @@ if (NOT DEFINED WAMR_BUILD_LIBC_WASI)
 endif ()
 
 if (WAMR_BUILD_TARGET STREQUAL "RISCV64_LP64" OR WAMR_BUILD_TARGET STREQUAL "RISCV32_ILP32")
-  set (WAMR_BUILD_FAST_INTERP 1)
+  # Default RISC-V to the fast interpreter unless overridden via -D.
+  if (NOT DEFINED WAMR_BUILD_FAST_INTERP)
+    set (WAMR_BUILD_FAST_INTERP 1)
+  endif ()
 endif ()
 
 # Override the global heap usage
@@ -51,13 +54,39 @@ if (NOT DEFINED WAMR_BUILD_GLOBAL_HEAP_SIZE)
   set (WAMR_BUILD_GLOBAL_HEAP_SIZE 131072) # 128 KB
 endif ()
 
-set (WAMR_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../wasm-micro-runtime/)
+# Benchmark identity emitted in each CSV row; set by build_and_run.sh.
+if (NOT DEFINED BENCH_NAME)
+  set (BENCH_NAME "wasm")
+endif ()
+if (NOT DEFINED BENCH_MODE)
+  set (BENCH_MODE "interp")
+endif ()
+if (NOT DEFINED BENCH_PLATFORM)
+  set (BENCH_PLATFORM "thumbv8")
+endif ()
 
-include (${WAMR_ROOT_DIR}/build-scripts/runtime_lib.cmake)
+if (BENCH_MODE STREQUAL "native")
+  # Native baseline: bench_main straight on the CPU, no WAMR.
+  if (NOT DEFINED BENCH_SRC)
+    message (FATAL_ERROR "BENCH_MODE=native requires -DBENCH_SRC=results/<bench>/main.c")
+  endif ()
+  target_sources(app PRIVATE
+                 src/native_provider.c
+                 src/wasm-src/bench_harness.c
+                 ${BENCH_SRC})
+else ()
+  set (WAMR_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../wasm-micro-runtime/)
+  include (${WAMR_ROOT_DIR}/build-scripts/runtime_lib.cmake)
+  target_sources(app PRIVATE
+                 ${WAMR_RUNTIME_LIB_SOURCE}
+                 src/main.c)
+endif ()
 
-target_sources(app PRIVATE
-               ${WAMR_RUNTIME_LIB_SOURCE}
-               src/main.c)
+target_include_directories(app PRIVATE src/wasm-src)
+target_compile_definitions(app PRIVATE
+                           BENCH_NAME="${BENCH_NAME}"
+                           BENCH_MODE="${BENCH_MODE}"
+                           BENCH_PLATFORM="${BENCH_PLATFORM}")
 
 # Suppress -Wtype-limits warnings originating from Zephyr's own headers
 # (e.g. net_if.h "comparison is always true due to limited range of data type").

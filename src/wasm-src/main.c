@@ -3,8 +3,11 @@
  * SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
  */
 
+/* placeholder test*/
+
 #include <stdint.h>
-#include <stdio.h>
+
+volatile int benchmark_result = 0;
 
 static int fib(int n)
 {
@@ -13,10 +16,13 @@ static int fib(int n)
     return fib(n - 1) + fib(n - 2);
 }
 
-int main(void)
+void bench_init(void)
 {
-    volatile int result = fib(30);
+}
 
-    (void)result;
-    return 0;
+uint32_t bench_run(void)
+{
+    int result = fib(30);
+    benchmark_result = result;
+    return (uint32_t)result;
 }

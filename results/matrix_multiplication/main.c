@@ -13,7 +13,7 @@ static float C[MATRIX_SIZE][MATRIX_SIZE];
 
 volatile float benchmark_result = 0.0f;
 
-static void init_matrices(void)
+void bench_init(void)
 {
     for (int i = 0; i < MATRIX_SIZE; i++) {
         for (int j = 0; j < MATRIX_SIZE; j++) {
@@ -24,9 +24,8 @@ static void init_matrices(void)
     }
 }
 
-int main(void)
+uint32_t bench_run(void)
 {
-    init_matrices();
     for (int i = 0; i < MATRIX_SIZE; i++) {
         for (int j = 0; j < MATRIX_SIZE; j++) {
             float sum = 0.0f;
@@ -44,5 +43,5 @@ int main(void)
             checksum += C[i][j];
 
     benchmark_result = checksum;
-    return 0;
+    return (uint32_t)checksum;
 }

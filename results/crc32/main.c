@@ -11,7 +11,7 @@ static uint8_t buffer[BUFFER_SIZE];
 
 volatile uint32_t benchmark_result = 0;
 
-static void init_buffer(void)
+void bench_init(void)
 {
     uint32_t x = 1;
 
@@ -37,10 +37,9 @@ static uint32_t crc32(const uint8_t *data, uint32_t length)
     return ~crc;
 }
 
-int main(void)
+uint32_t bench_run(void)
 {
-    init_buffer();
     uint32_t crc = crc32(buffer, BUFFER_SIZE);
     benchmark_result = crc;
-    return (int)crc;
+    return crc;
 }
