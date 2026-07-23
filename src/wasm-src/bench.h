@@ -15,6 +15,7 @@
 
 #include <stdint.h>
 
+void     bench_sleep(uint32_t seconds);
 void     bench_init(void);
 uint32_t bench_run(void);
 

@@ -1,40 +1,20 @@
-0: Total main execution cycles: 1340258469
-0: Total execution time: 8935 ms
-1: Total main execution cycles: 1340166340
-1: Total execution time: 8935 ms
-2: Total main execution cycles: 1340162410
-2: Total execution time: 8934 ms
-3: Total main execution cycles: 1340157168
-3: Total execution time: 8934 ms
-4: Total main execution cycles: 1340157071
-4: Total execution time: 8934 ms
-5: Total main execution cycles: 1340156764
-5: Total execution time: 8935 ms
-6: Total main execution cycles: 1340157444
-6: Total execution time: 8934 ms
-7: Total main execution cycles: 1340155774
-7: Total execution time: 8934 ms
-8: Total main execution cycles: 1340155637
-8: Total execution time: 8935 ms
-9: Total main execution cycles: 1340156568
-9: Total execution time: 8934 ms
-10: Total main execution cycles: 1340156204
-10: Total execution time: 8934 ms
-11: Total main execution cycles: 1340156024
-11: Total execution time: 8935 ms
-12: Total main execution cycles: 1340155519
-12: Total execution time: 8934 ms
-13: Total main execution cycles: 1340155596
-13: Total execution time: 8934 ms
-14: Total main execution cycles: 1340157248
-14: Total execution time: 8934 ms
-15: Total main execution cycles: 1340155638
-15: Total execution time: 8935 ms
-16: Total main execution cycles: 1340157604
-16: Total execution time: 8934 ms
-17: Total main execution cycles: 1340157496
-17: Total execution time: 8934 ms
-18: Total main execution cycles: 1340154817
-18: Total execution time: 8935 ms
-19: Total main execution cycles: 1340156075
-19: Total execution time: 8934 ms
+fibonacci,interp,thumbv8,0,1354253329,9028355526
+fibonacci,interp,thumbv8,1,1354221785,9028145233
+fibonacci,interp,thumbv8,2,1354218572,9028123813
+fibonacci,interp,thumbv8,3,1354215729,9028104860
+fibonacci,interp,thumbv8,4,1354214924,9028099493
+fibonacci,interp,thumbv8,5,1354216669,9028111126
+fibonacci,interp,thumbv8,6,1354218253,9028121686
+fibonacci,interp,thumbv8,7,1354217830,9028118866
+fibonacci,interp,thumbv8,8,1354216164,9028107760
+fibonacci,interp,thumbv8,9,1354216182,9028107880
+fibonacci,interp,thumbv8,10,1354215391,9028102606
+fibonacci,interp,thumbv8,11,1354217101,9028114006
+fibonacci,interp,thumbv8,12,1354216514,9028110093
+fibonacci,interp,thumbv8,13,1354218130,9028120866
+fibonacci,interp,thumbv8,14,1354215961,9028106406
+fibonacci,interp,thumbv8,15,1354216627,9028110846
+fibonacci,interp,thumbv8,16,1354216445,9028109633
+fibonacci,interp,thumbv8,17,1354215204,9028101360
+fibonacci,interp,thumbv8,18,1354219109,9028127393
+fibonacci,interp,thumbv8,19,1354218011,9028120073

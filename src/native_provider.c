@@ -20,6 +20,10 @@
 #define BENCH_PLATFORM "unknown"
 #endif
 
+void bench_sleep(uint32_t seconds){
+    k_sleep(K_SECONDS(1));
+}
+
 uint32_t bench_now_cycles(void)
 {
     return k_cycle_get_32();

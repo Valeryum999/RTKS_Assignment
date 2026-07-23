@@ -49,9 +49,16 @@ native_bench_report(wasm_exec_env_t exec_env, uint32 iter, uint32 cycles)
            iter, cycles, (unsigned long long)value_ns);
 }
 
+static void
+native_bench_sleep(uint32 seconds)
+{
+    k_sleep(K_SECONDS(1));
+}
+
 static NativeSymbol native_symbols[] = {
     { "bench_now_cycles", (void *)native_bench_now_cycles, "()i", NULL },
     { "bench_report", (void *)native_bench_report, "(ii)", NULL },
+    { "bench_sleep", (void *)native_bench_sleep, "(i)", NULL}
 };
 
 #if WASM_ENABLE_GLOBAL_HEAP_POOL != 0

@@ -1,40 +1,20 @@
-0: Total main execution cycles: 43958646
-0: Total execution time: 293 ms
-1: Total main execution cycles: 43880298
-1: Total execution time: 292 ms
-2: Total main execution cycles: 43873982
-2: Total execution time: 293 ms
-3: Total main execution cycles: 43872041
-3: Total execution time: 293 ms
-4: Total main execution cycles: 43870158
-4: Total execution time: 292 ms
-5: Total main execution cycles: 43869070
-5: Total execution time: 292 ms
-6: Total main execution cycles: 43870470
-6: Total execution time: 293 ms
-7: Total main execution cycles: 43869781
-7: Total execution time: 292 ms
-8: Total main execution cycles: 43870570
-8: Total execution time: 292 ms
-9: Total main execution cycles: 43869515
-9: Total execution time: 293 ms
-10: Total main execution cycles: 43868179
-10: Total execution time: 292 ms
-11: Total main execution cycles: 43869834
-11: Total execution time: 292 ms
-12: Total main execution cycles: 43870982
-12: Total execution time: 293 ms
-13: Total main execution cycles: 43869306
-13: Total execution time: 293 ms
-14: Total main execution cycles: 43870025
-14: Total execution time: 292 ms
-15: Total main execution cycles: 43870718
-15: Total execution time: 292 ms
-16: Total main execution cycles: 43869076
-16: Total execution time: 293 ms
-17: Total main execution cycles: 43869032
-17: Total execution time: 292 ms
-18: Total main execution cycles: 43869835
-18: Total execution time: 292 ms
-19: Total main execution cycles: 43869150
-19: Total execution time: 293 ms
+crc32,interp,thumbv8,0,23255633,155037553
+crc32,interp,thumbv8,1,23248873,154992486
+crc32,interp,thumbv8,2,23248315,154988766
+crc32,interp,thumbv8,3,23247531,154983540
+crc32,interp,thumbv8,4,23247985,154986566
+crc32,interp,thumbv8,5,23248092,154987280
+crc32,interp,thumbv8,6,23246632,154977546
+crc32,interp,thumbv8,7,23247962,154986413
+crc32,interp,thumbv8,8,23247738,154984920
+crc32,interp,thumbv8,9,23247842,154985613
+crc32,interp,thumbv8,10,23246916,154979440
+crc32,interp,thumbv8,11,23247606,154984040
+crc32,interp,thumbv8,12,23247232,154981546
+crc32,interp,thumbv8,13,23246960,154979733
+crc32,interp,thumbv8,14,23246039,154973593
+crc32,interp,thumbv8,15,23247387,154982580
+crc32,interp,thumbv8,16,23247392,154982613
+crc32,interp,thumbv8,17,23247459,154983060
+crc32,interp,thumbv8,18,23247534,154983560
+crc32,interp,thumbv8,19,23247051,154980340

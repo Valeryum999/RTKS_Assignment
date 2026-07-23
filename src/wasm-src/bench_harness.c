@@ -19,5 +19,6 @@ void bench_main(void)
         uint32_t after = bench_now_cycles();
 
         bench_report(i, after - before);
+        bench_sleep(1);
     }
 }

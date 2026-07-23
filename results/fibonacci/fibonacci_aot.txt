@@ -1,40 +1,20 @@
-0: Total main execution cycles: 71906052
-0: Total execution time: 479 ms
-1: Total main execution cycles: 71833630
-1: Total execution time: 479 ms
-2: Total main execution cycles: 71828211
-2: Total execution time: 479 ms
-3: Total main execution cycles: 71827681
-3: Total execution time: 479 ms
-4: Total main execution cycles: 71826779
-4: Total execution time: 478 ms
-5: Total main execution cycles: 71826562
-5: Total execution time: 479 ms
-6: Total main execution cycles: 71826650
-6: Total execution time: 479 ms
-7: Total main execution cycles: 71826937
-7: Total execution time: 478 ms
-8: Total main execution cycles: 71826913
-8: Total execution time: 479 ms
-9: Total main execution cycles: 71826592
-9: Total execution time: 479 ms
-10: Total main execution cycles: 71825849
-10: Total execution time: 479 ms
-11: Total main execution cycles: 71826831
-11: Total execution time: 479 ms
-12: Total main execution cycles: 71826369
-12: Total execution time: 479 ms
-13: Total main execution cycles: 71826966
-13: Total execution time: 479 ms
-14: Total main execution cycles: 71826438
-14: Total execution time: 478 ms
-15: Total main execution cycles: 71826463
-15: Total execution time: 479 ms
-16: Total main execution cycles: 71826788
-16: Total execution time: 479 ms
-17: Total main execution cycles: 71827194
-17: Total execution time: 478 ms
-18: Total main execution cycles: 71826838
-18: Total execution time: 479 ms
-19: Total main execution cycles: 71827152
-19: Total execution time: 479 ms
+fibonacci,aot,thumbv8,0,70676232,471174880
+fibonacci,aot,thumbv8,1,70663994,471093293
+fibonacci,aot,thumbv8,2,70663951,471093006
+fibonacci,aot,thumbv8,3,70663994,471093293
+fibonacci,aot,thumbv8,4,70663942,471092946
+fibonacci,aot,thumbv8,5,70664086,471093906
+fibonacci,aot,thumbv8,6,70663959,471093060
+fibonacci,aot,thumbv8,7,70663995,471093300
+fibonacci,aot,thumbv8,8,70663611,471090740
+fibonacci,aot,thumbv8,9,70663706,471091373
+fibonacci,aot,thumbv8,10,70663883,471092553
+fibonacci,aot,thumbv8,11,70663942,471092946
+fibonacci,aot,thumbv8,12,70663960,471093066
+fibonacci,aot,thumbv8,13,70663871,471092473
+fibonacci,aot,thumbv8,14,70663487,471089913
+fibonacci,aot,thumbv8,15,70663611,471090740
+fibonacci,aot,thumbv8,16,70663736,471091573
+fibonacci,aot,thumbv8,17,70664011,471093406
+fibonacci,aot,thumbv8,18,70663479,471089860
+fibonacci,aot,thumbv8,19,70663766,471091773
