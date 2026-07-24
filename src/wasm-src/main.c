@@ -5,55 +5,42 @@
 
 #include <stdint.h>
 
-#define ARRAY_SIZE 4096
+#define MATRIX_SIZE 64
 
-static int32_t array[ARRAY_SIZE];
+static float A[MATRIX_SIZE][MATRIX_SIZE];
+static float B[MATRIX_SIZE][MATRIX_SIZE];
+static float C[MATRIX_SIZE][MATRIX_SIZE];
 
-volatile int32_t benchmark_result = 0;
+volatile float benchmark_result = 0.0f;
 
 void bench_init(void)
 {
-    uint32_t x = 1;
-
-    for (int i = 0; i < ARRAY_SIZE; i++) {
-        x = x * 1664525u + 1013904223u;
-        array[i] = (int32_t)x;
-    }
-}
-
-static void quicksort(int32_t *a, int lo, int hi)
-{
-    if (lo >= hi)
-        return;
-
-    int32_t pivot = a[hi];
-    int i = lo - 1;
-
-    for (int j = lo; j < hi; j++) {
-        if (a[j] <= pivot) {
-            i++;
-            int32_t t = a[i];
-            a[i] = a[j];
-            a[j] = t;
+    for (int i = 0; i < MATRIX_SIZE; i++) {
+        for (int j = 0; j < MATRIX_SIZE; j++) {
+            A[i][j] = (float)((i + j) % 17);
+            B[i][j] = (float)((i * 3 + j * 5) % 23);
+            C[i][j] = 0.0f;
         }
     }
-    i++;
-    int32_t t = a[i];
-    a[i] = a[hi];
-    a[hi] = t;
-
-    quicksort(a, lo, i - 1);
-    quicksort(a, i + 1, hi);
 }
 
 void bench_run(void)
 {
-    quicksort(array, 0, ARRAY_SIZE - 1);
+    for (int i = 0; i < MATRIX_SIZE; i++) {
+        for (int j = 0; j < MATRIX_SIZE; j++) {
+            float sum = 0.0f;
+            for (int k = 0; k < MATRIX_SIZE; k++) {
+                sum += A[i][k] * B[k][j];
+            }
+            C[i][j] = sum;
+        }
+    }
 
-    /* Checksum prevents dead-code elimination of the sort. */
-    int32_t checksum = 0;
-    for (int i = 0; i < ARRAY_SIZE; i++)
-        checksum += array[i] ^ i;
+    float checksum = 0.0f;
+
+    for (int i = 0; i < MATRIX_SIZE; i++)
+        for (int j = 0; j < MATRIX_SIZE; j++)
+            checksum += C[i][j];
 
     benchmark_result = checksum;
 }
