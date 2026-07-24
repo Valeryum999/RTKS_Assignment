@@ -18,9 +18,7 @@ void bench_init(void)
 {
 }
 
-uint32_t bench_run(void)
+void bench_run(void)
 {
-    int result = fib(30);
-    benchmark_result = result;
-    return (uint32_t)result;
+    benchmark_result = fib(30);
 }

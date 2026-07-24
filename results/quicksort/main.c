@@ -46,7 +46,7 @@ static void quicksort(int32_t *a, int lo, int hi)
     quicksort(a, i + 1, hi);
 }
 
-uint32_t bench_run(void)
+void bench_run(void)
 {
     quicksort(array, 0, ARRAY_SIZE - 1);
 
@@ -56,5 +56,4 @@ uint32_t bench_run(void)
         checksum += array[i] ^ i;
 
     benchmark_result = checksum;
-    return (uint32_t)checksum;
 }

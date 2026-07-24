@@ -24,7 +24,7 @@ void bench_init(void)
     }
 }
 
-uint32_t bench_run(void)
+void bench_run(void)
 {
     for (int i = 0; i < MATRIX_SIZE; i++) {
         for (int j = 0; j < MATRIX_SIZE; j++) {
@@ -43,5 +43,4 @@ uint32_t bench_run(void)
             checksum += C[i][j];
 
     benchmark_result = checksum;
-    return (uint32_t)checksum;
 }

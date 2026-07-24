@@ -17,7 +17,7 @@
 
 void     bench_sleep(uint32_t seconds);
 void     bench_init(void);
-uint32_t bench_run(void);
+void     bench_run(void);
 
 uint32_t bench_now_cycles(void);
 void     bench_report(uint32_t iter, uint32_t cycles);

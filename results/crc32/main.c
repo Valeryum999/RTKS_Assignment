@@ -37,9 +37,7 @@ static uint32_t crc32(const uint8_t *data, uint32_t length)
     return ~crc;
 }
 
-uint32_t bench_run(void)
+void bench_run(void)
 {
-    uint32_t crc = crc32(buffer, BUFFER_SIZE);
-    benchmark_result = crc;
-    return crc;
+    benchmark_result = crc32(buffer, BUFFER_SIZE);
 }
