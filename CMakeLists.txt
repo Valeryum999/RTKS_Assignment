@@ -74,7 +74,6 @@ if (BENCH_MODE STREQUAL "native")
                  src/native_provider.c
                  src/wasm-src/bench_harness.c
                  ${BENCH_SRC})
-  target_compile_options(app PRIVATE -O3)
 else ()
   set (WAMR_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../wasm-micro-runtime/)
   include (${WAMR_ROOT_DIR}/build-scripts/runtime_lib.cmake)
