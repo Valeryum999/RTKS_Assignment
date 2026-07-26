@@ -15,10 +15,19 @@ volatile float benchmark_result = 0.0f;
 
 void bench_init(void)
 {
+    float seed = 1.234567f;
+
     for (int i = 0; i < MATRIX_SIZE; i++) {
         for (int j = 0; j < MATRIX_SIZE; j++) {
-            A[i][j] = (float)((i + j) % 17);
-            B[i][j] = (float)((i * 3 + j * 5) % 23);
+            seed = seed * 1.3141593f + 0.2718282f;
+            while (seed >= 100.0f)
+                seed -= 100.0f;
+            A[i][j] = seed;
+
+            seed = seed * 1.3141593f + 0.2718282f;
+            while (seed >= 100.0f)
+                seed -= 100.0f;
+            B[i][j] = seed;
             C[i][j] = 0.0f;
         }
     }

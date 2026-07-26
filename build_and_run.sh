@@ -53,8 +53,9 @@ case "$TARGET" in
         ;;
     riscv32)
         WAMR_BUILD_TARGET="RISCV32_ILP32"
-        BOARD="rpi_pico2/rp2350a/hazard3"
-        WAMRC_TARGET_ARGS="--target=riscv32 --target-abi=ilp32"
+        BOARD="esp32c6_devkitc/esp32c6/hpcore"
+        # BOARD="rpi_pico2/rp2350a/hazard3"
+        WAMRC_TARGET_ARGS="--target=riscv32 --target-abi=ilp32f --cpu=generic-rv32 --cpu-features=+i,+m,+a,+c,-f,-d"
         PLATFORM="riscv32"
         ;;
     *) echo "Unknown target: $TARGET" >&2; usage ;;

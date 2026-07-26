@@ -15,7 +15,6 @@ echo "Build wasm app .."
         -Wl,--export=bench_run -Wl,--export=bench_init \
         -Wl,--export=__data_end -Wl,--export=__heap_base \
         -Wl,--strip-all,--no-entry \
-        -Wl,--allow-undefined \
         -nostdlib
 
 # echo "Build binarydump tool .."
