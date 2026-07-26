@@ -72,7 +72,6 @@ if (BENCH_MODE STREQUAL "native")
   endif ()
   target_sources(app PRIVATE
                  src/native_provider.c
-                 src/wasm-src/bench_harness.c
                  ${BENCH_SRC})
 else ()
   set (WAMR_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../wasm-micro-runtime/)

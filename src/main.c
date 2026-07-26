@@ -31,35 +31,17 @@
 #define BENCH_PLATFORM "unknown"
 #endif
 
-/* Imports (module "env") that the module's loop calls: read the cycle
- * counter and emit one CSV sample. First arg is the exec env (WAMR ABI). */
-static uint32
-native_bench_now_cycles(wasm_exec_env_t exec_env)
-{
-    (void)exec_env;
-    return k_cycle_get_32();
-}
+#ifndef BENCH_ITERATIONS
+#define BENCH_ITERATIONS 20
+#endif
 
 static void
-native_bench_report(wasm_exec_env_t exec_env, uint32 iter, uint32 cycles)
+bench_report(uint32 iter, uint64 cycles)
 {
-    (void)exec_env;
     uint64_t value_ns = k_cyc_to_ns_floor64((uint64_t)cycles);
-    printf("%s,%s,%s,%u,%u,%llu\n", BENCH_NAME, BENCH_MODE, BENCH_PLATFORM,
+    printf("%s,%s,%s,%u,%llu,%llu\n", BENCH_NAME, BENCH_MODE, BENCH_PLATFORM,
            iter, cycles, (unsigned long long)value_ns);
 }
-
-static void
-native_bench_sleep(uint32 seconds)
-{
-    k_sleep(K_SECONDS(1));
-}
-
-static NativeSymbol native_symbols[] = {
-    { "bench_now_cycles", (void *)native_bench_now_cycles, "()i", NULL },
-    { "bench_report", (void *)native_bench_report, "(ii)", NULL },
-    { "bench_sleep", (void *)native_bench_sleep, "(i)", NULL}
-};
 
 #if WASM_ENABLE_GLOBAL_HEAP_POOL != 0
 static char global_heap_buf[CONFIG_GLOBAL_HEAP_BUF_SIZE] = { 0 };
@@ -74,6 +56,7 @@ iwasm_main(void *arg1, void *arg2, void *arg3)
     wasm_module_inst_t wasm_module_inst = NULL;
     wasm_exec_env_t exec_env = NULL;
     wasm_function_inst_t func_main = NULL;
+    wasm_function_inst_t bench_init = NULL;
     uint32 call_argv[1] = { 0 };
     RuntimeInitArgs init_args;
     char error_buf[128];
@@ -104,13 +87,6 @@ iwasm_main(void *arg1, void *arg2, void *arg3)
         return;
     }
 
-    if (!wasm_runtime_register_natives(
-            "env", native_symbols,
-            sizeof(native_symbols) / sizeof(NativeSymbol))) {
-        printf("Register natives failed.\n");
-        goto fail1;
-    }
-
 #if WASM_ENABLE_LOG != 0
     bh_log_set_verbose_level(log_verbose_level);
 #endif
@@ -131,9 +107,15 @@ iwasm_main(void *arg1, void *arg2, void *arg3)
         goto fail2;
     }
 
-    func_main = wasm_runtime_lookup_function(wasm_module_inst, "bench_main");
+    func_main = wasm_runtime_lookup_function(wasm_module_inst, "bench_run");
     if (!func_main) {
-        printf("Failed to lookup exported function bench_main\n");
+        printf("Failed to lookup exported function bench_run\n");
+        goto fail2;
+    }
+
+    bench_init = wasm_runtime_lookup_function(wasm_module_inst, "bench_init");
+    if (!func_main) {
+        printf("Failed to lookup exported function bench_init\n");
         goto fail2;
     }
 
@@ -145,10 +127,21 @@ iwasm_main(void *arg1, void *arg2, void *arg3)
     }
 
     printf("benchmark,mode,platform,iteration,value_cycles,value_ns\n");
-    if (!wasm_runtime_call_wasm(exec_env, func_main, 0, call_argv)) {
-        const char *exception = wasm_runtime_get_exception(wasm_module_inst);
-        if (exception)
-            printf("%s\n", exception);
+    for(int i=0; i<BENCH_ITERATIONS; i++){
+        if (!wasm_runtime_call_wasm(exec_env, bench_init, 0, call_argv)) {
+            const char *exception = wasm_runtime_get_exception(wasm_module_inst);
+            if (exception)
+                printf("%s\n", exception);
+        }
+        uint64_t before = k_cycle_get_64();
+        if (!wasm_runtime_call_wasm(exec_env, func_main, 0, call_argv)) {
+            const char *exception = wasm_runtime_get_exception(wasm_module_inst);
+            if (exception)
+                printf("%s\n", exception);
+        }
+        uint64_t after = k_cycle_get_64();
+        bench_report(i, after - before);
+        k_sleep(K_SECONDS(1));
     }
 
     wasm_runtime_destroy_exec_env(exec_env);

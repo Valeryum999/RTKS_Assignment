@@ -53,9 +53,7 @@ case "$TARGET" in
         ;;
     riscv32)
         WAMR_BUILD_TARGET="RISCV32_ILP32"
-        # Zephyr board for the RP2350 Hazard3 RISC-V core. Adjust to match
-        # your Zephyr version if the board identifier differs.
-        BOARD="rpi_pico2/rp2350a/riscv"
+        BOARD="rpi_pico2/rp2350a/hazard3"
         WAMRC_TARGET_ARGS="--target=riscv32 --target-abi=ilp32"
         PLATFORM="riscv32"
         ;;
@@ -88,7 +86,7 @@ if [[ "$IS_NATIVE" == "1" ]]; then
         echo "--mode native requires --bench" >&2
         exit 1
     fi
-    BENCH_SRC="results/${BENCH}/main.c"
+    BENCH_SRC="results/m33/${BENCH}/main.c"
     if [[ ! -f "$BENCH_SRC" ]]; then
         echo "No such benchmark source: $BENCH_SRC" >&2
         exit 1
@@ -107,7 +105,7 @@ fi
 # --- Select the benchmark source --------------------------------------------
 BENCH_NAME="wasm"
 if [[ -n "$BENCH" ]]; then
-    SRC="results/${BENCH}/main.c"
+    SRC="results/m33/${BENCH}/main.c"
     if [[ ! -f "$SRC" ]]; then
         echo "No such benchmark source: $SRC" >&2
         exit 1
