@@ -11,8 +11,8 @@ modes=(
 
 benches=(
     crc32
-    quicksort
     matrix_multiplication
+    quicksort
     fibonacci
 )
 
@@ -22,7 +22,7 @@ for mode in "${modes[@]}"; do
         echo "Running mode=$mode bench=$bench"
         echo "========================================"
 
-        ./build_and_run.sh --mode "$mode" --target thumbv8 --bench "$bench"
+        ./build_and_run.sh --mode "$mode" --target rpi_pico2_thumb --bench "$bench"
 
         echo "Waiting 30 seconds..."
         sleep 30

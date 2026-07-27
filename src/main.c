@@ -133,13 +133,13 @@ iwasm_main(void *arg1, void *arg2, void *arg3)
             if (exception)
                 printf("%s\n", exception);
         }
-        uint64_t before = k_cycle_get_64();
+        uint32_t before = k_cycle_get_32();
         if (!wasm_runtime_call_wasm(exec_env, func_main, 0, call_argv)) {
             const char *exception = wasm_runtime_get_exception(wasm_module_inst);
             if (exception)
                 printf("%s\n", exception);
         }
-        uint64_t after = k_cycle_get_64();
+        uint32_t after = k_cycle_get_32();
         bench_report(i, after - before);
         k_sleep(K_SECONDS(1));
     }

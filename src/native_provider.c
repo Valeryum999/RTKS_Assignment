@@ -36,9 +36,9 @@ int main(void)
     for (uint32_t i = 0; i < BENCH_ITERATIONS; i++) {
         bench_init();
 
-        uint64_t before = k_cycle_get_64();
+        uint32_t before = k_cycle_get_32();
         bench_run();
-        uint64_t after = k_cycle_get_64();
+        uint32_t after = k_cycle_get_32();
 
         bench_report(i, after - before);
         k_sleep(K_SECONDS(1));
