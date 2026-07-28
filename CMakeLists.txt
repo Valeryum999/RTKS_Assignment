@@ -68,7 +68,7 @@ endif ()
 if (BENCH_MODE STREQUAL "native")
   # Native baseline: bench_main straight on the CPU, no WAMR.
   if (NOT DEFINED BENCH_SRC)
-    message (FATAL_ERROR "BENCH_MODE=native requires -DBENCH_SRC=results/<bench>/main.c")
+    message (FATAL_ERROR "BENCH_MODE=native requires -DBENCH_SRC=benchmarks/<bench>/main.c")
   endif ()
   target_sources(app PRIVATE
                  src/native_provider.c

@@ -17,7 +17,7 @@ USAGE:
   --target  rpi_pico2_thumb | rpi_pico2_riscv32 | esp32c6_riscv32
             (default: rpi_pico2_thumb)
   --bench   fibonacci | crc32 | matrix_multiplication | quicksort
-            For the wasm modes: when given, results/m33/<bench>/main.c is
+            For the wasm modes: when given, benchmarks/<bench>/main.c is
             copied into src/wasm-src/main.c before building; otherwise the
             current src/wasm-src/main.c is used and the CSV name is "wasm".
             Required for --mode native.
@@ -93,7 +93,7 @@ if [[ "$IS_NATIVE" == "1" ]]; then
         echo "--mode native requires --bench" >&2
         exit 1
     fi
-    BENCH_SRC="results/m33/${BENCH}/main.c"
+    BENCH_SRC="benchmarks/${BENCH}/main.c"
     if [[ ! -f "$BENCH_SRC" ]]; then
         echo "No such benchmark source: $BENCH_SRC" >&2
         exit 1
@@ -112,7 +112,7 @@ fi
 # --- Select the benchmark source --------------------------------------------
 BENCH_NAME="wasm"
 if [[ -n "$BENCH" ]]; then
-    SRC="results/m33/${BENCH}/main.c"
+    SRC="benchmarks/${BENCH}/main.c"
     if [[ ! -f "$SRC" ]]; then
         echo "No such benchmark source: $SRC" >&2
         exit 1
