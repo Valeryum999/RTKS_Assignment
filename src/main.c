@@ -114,7 +114,7 @@ iwasm_main(void *arg1, void *arg2, void *arg3)
     }
 
     bench_init = wasm_runtime_lookup_function(wasm_module_inst, "bench_init");
-    if (!func_main) {
+    if (!bench_init) {
         printf("Failed to lookup exported function bench_init\n");
         goto fail2;
     }
