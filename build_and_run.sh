@@ -14,23 +14,24 @@ USAGE:
   --mode    interp | fast_interp | aot | native   (default: interp)
             native = same kernel/loop compiled straight to the CPU, no WAMR
             (the baseline). Requires --bench.
-  --target  thumbv8 | riscv32                      (default: thumbv8)
+  --target  rpi_pico2_thumb | rpi_pico2_riscv32 | esp32c6_riscv32
+            (default: rpi_pico2_thumb)
   --bench   fibonacci | crc32 | matrix_multiplication | quicksort
-            For the wasm modes: when given, results/<bench>/main.c is copied
-            into src/wasm-src/main.c before building; otherwise the current
-            src/wasm-src/main.c is used and the CSV name is "wasm".
+            For the wasm modes: when given, results/m33/<bench>/main.c is
+            copied into src/wasm-src/main.c before building; otherwise the
+            current src/wasm-src/main.c is used and the CSV name is "wasm".
             Required for --mode native.
 
 Examples:
-  build_and_run.sh --mode aot --target thumbv8 --bench crc32
-  build_and_run.sh --mode fast_interp --target riscv32 --bench quicksort
-  build_and_run.sh --mode native --target thumbv8 --bench quicksort
+  build_and_run.sh --mode aot --target rpi_pico2_thumb --bench crc32
+  build_and_run.sh --mode fast_interp --target rpi_pico2_riscv32 --bench quicksort
+  build_and_run.sh --mode native --target rpi_pico2_thumb --bench quicksort
 EOF
         exit 1
 }
 
 MODE="interp"
-TARGET="thumbv8"
+TARGET="rpi_pico2_thumb"
 BENCH=""
 
 while [[ $# -gt 0 ]]; do
@@ -62,12 +63,6 @@ case "$TARGET" in
         BOARD="esp32c6_devkitc/esp32c6/hpcore"
         WAMRC_TARGET_ARGS="--target=riscv32 --target-abi=ilp32 --cpu=generic-rv32 --cpu-features=+i,+m,+a,+c,-f,-d"
         PLATFORM="esp32c6_riscv32"
-        ;;
-    esp32s3_xtensa)
-        WAMR_BUILD_TARGET="XTENSA"
-        BOARD="weact_esp32s3_mini/esp32s3/procpu"
-        WAMRC_TARGET_ARGS="--target=xtensa --cpu=generic"
-        PLATFORM="esp32s3_xtensa"
         ;;
     *) echo "Unknown target: $TARGET" >&2; usage ;;
 esac
@@ -131,13 +126,8 @@ echo "==> mode=$MODE target=$TARGET bench=$BENCH_NAME board=$BOARD"
 # --- Build the wasm module and generate the C header ------------------------
 src/wasm-src/build.sh
 if [[ "$IS_AOT" == "1" ]]; then
-    if [[ "$PLATFORM" == "esp32s3_xtensa" ]]; then
-        docker run --rm -v "$PWD":/data wamrc-xtensa ${WAMRC_TARGET_ARGS} \
-            -o /data/src/wasm-src/out.aot /data/src/wasm-src/test.wasm
-    else
-        docker run --rm -v "$PWD":/data wamrc ${WAMRC_TARGET_ARGS} \
-            -o /data/src/wasm-src/out.aot /data/src/wasm-src/test.wasm
-    fi
+    docker run --rm -v "$PWD":/data wamrc ${WAMRC_TARGET_ARGS} \
+        -o /data/src/wasm-src/out.aot /data/src/wasm-src/test.wasm
     src/wasm-src/build/binarydump -o "${PWD}/src/test_wasm.h" \
         -n wasm_test_file "${PWD}/src/wasm-src/out.aot"
 else
