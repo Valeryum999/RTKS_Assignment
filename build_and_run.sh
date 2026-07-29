@@ -49,19 +49,19 @@ case "$TARGET" in
     rpi_pico2_thumb)
         WAMR_BUILD_TARGET="THUMBV8"
         BOARD="rpi_pico2/rp2350a/m33"
-        WAMRC_TARGET_ARGS="--target=thumbv8m.main"
+        WAMRC_TARGET_ARGS="--target=thumbv8m.main --cpu=cortex-m33"
         PLATFORM="rpi_pico2_thumb"
         ;;
     rpi_pico2_riscv32)
         WAMR_BUILD_TARGET="RISCV32_ILP32"
         BOARD="rpi_pico2/rp2350a/hazard3"
-        WAMRC_TARGET_ARGS="--target=riscv32 --target-abi=ilp32 --cpu=generic-rv32 --cpu-features=+i,+m,+a,+c,-f,-d"
+        WAMRC_TARGET_ARGS="--target=riscv32 --target-abi=ilp32 --cpu=generic-rv32 --cpu-features=+i,+m,+c,-a,-f,-d"
         PLATFORM="rpi_pico2_riscv32"
         ;;
     esp32c6_riscv32)
         WAMR_BUILD_TARGET="RISCV32_ILP32"
         BOARD="esp32c6_devkitc/esp32c6/hpcore"
-        WAMRC_TARGET_ARGS="--target=riscv32 --target-abi=ilp32 --cpu=generic-rv32 --cpu-features=+i,+m,+a,+c,-f,-d"
+        WAMRC_TARGET_ARGS="--target=riscv32 --target-abi=ilp32 --cpu=generic-rv32 --cpu-features=+i,+m,+c,-a,-f,-d"
         PLATFORM="esp32c6_riscv32"
         ;;
     *) echo "Unknown target: $TARGET" >&2; usage ;;
